@@ -131,6 +131,44 @@ class Problem:
     def h(self, state):
         # heuristic method that computes the minimum manhattan distance
         # from pacman position to every remaining dot.
-        if state[1] == []: return 0
+        #if state[1] == []: return 0
         # Complete your code here
+        # remaining_dots = state[1]
+        # current_position = state[0]
+        current_pos, remaining_dots = state
+        remaining_dots = list(remaining_dots)
+        
+        if not remaining_dots:
+            return 0
+
+        # Define list
+        mst = {dot: False for dot in remaining_dots}
+        total_steps = 0
+        current_position = current_pos
+
+        # Visiting all goal nodes
+        while any(not visited for visited in mst.values()):
+            min_steps = float('inf')
+            nearest_dot = None
+
+            for dot in remaining_dots:
+                if not mst[dot]:
+                    if current_position == self.pacman:
+                        plan = self.dist[(current_position, dot)]
+                    else:
+                        plan = self.dist[(current_position, dot)]
+
+                    # For number of steps
+                    steps = len(plan)
+                    if steps < min_steps:
+                        min_steps = steps
+                        nearest_dot = dot
+
+            if nearest_dot:
+                mst[nearest_dot] = True
+                total_steps += min_steps
+                current_position = nearest_dot
+
+        return total_steps
+        
         

@@ -92,6 +92,7 @@ def AStar (p):
         count += 1
 
         # Complete one line of code here
+        neighbors = p.nextStates(node)
         # get next states or neighbor states by calling nextState
         # from the FourCornerProblem passing in the node.
         
@@ -103,12 +104,13 @@ def AStar (p):
             # Add nodes to priority queue
             newState= (f, gCost+step_cost, neighbor, node, a)
             # complete one line of code here
+            heapq.heappush(pq, newState)
             # insert newState to the priority queue pq
             
     return None, None
 
-filename = 'tinyCorners.txt'
-
+if __name__ == '__main__':
+    filename = 'smallSearch.txt'
 # Complete your code here:
 # Get an instance of the problem:
 
@@ -120,6 +122,7 @@ filename = 'tinyCorners.txt'
 
  
 # record start time
+p = Problem(filename)
 startTime = time.time()
 plan = bfs(p)
 endTime = time.time()
@@ -157,8 +160,10 @@ pac.runPlan(p, plan)
 # Complete one line of code here:
 # get an instance of the Problem passing
 #    in the file name
-
+p = Problem(filename)
 startTime = time.time()
+p.compute_distances()
+cost, plan = AStar(p)
 # Complete two lines of code here
 # 1) call compute distances method in FourCornersProblem
 
