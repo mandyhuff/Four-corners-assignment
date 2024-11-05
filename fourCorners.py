@@ -173,12 +173,4 @@ cost, plan = AStar(p)
 endTime = time.time()
 print ('Time: ', (endTime - startTime) * 10**3, "ms")
 # 3) print the cost, the plan and the plan length
-print('cost=', cost)
-print(plan)
-print('plan length=', len(plan))
-
-# Leave this code for plan execute and
-# moves pacman to collect the dots.
-pac = pacmanGraphic(1300, 700)
-pac.setup(p)
-pac.runPlan(p, plan)
+print('cost=',
